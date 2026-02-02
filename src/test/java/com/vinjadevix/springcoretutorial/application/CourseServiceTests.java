@@ -1,11 +1,20 @@
 package com.vinjadevix.springcoretutorial.application;
 
+import com.vinjadevix.springcoretutorial.application.dto.CourseResponse;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class CourseServiceTests {
+class CourseServiceTests {
+
     @Test
-    void returnsAString() {
+    void returnsNonNullFields() {
         CourseService service = new CourseService();
-        assert service.run() != null;
+        CourseResponse response = service.run();
+
+        assertAll(
+            () -> assertNotNull(response.id(), "id should not be null"),
+            () -> assertNotNull(response.name(), "name should not be null"),
+            () -> assertNotNull(response.description(), "description should not be null")
+        );
     }
 }
