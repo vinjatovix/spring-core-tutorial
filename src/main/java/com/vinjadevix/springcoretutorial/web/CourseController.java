@@ -2,6 +2,7 @@ package com.vinjadevix.springcoretutorial.web;
 
 import com.vinjadevix.springcoretutorial.application.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CourseController {
     private ApplicationService service;
 
-    @Autowired // Setter Injection (used for optional dependencies, if dependency is not provided the app can provide a default behavior)
-    public void setService(ApplicationService courseService) {
-        this.service = courseService;
+    @Autowired
+    // Setter Injection (used for optional dependencies, if dependency is not provided the app can provide a default behavior)
+    // @Qualifier is used to specify which bean to inject when multiple beans of the same type are present
+    public void setService(@Qualifier("courseService") ApplicationService service) {
+        this.service = service;
     }
 
     @GetMapping("/programming-exercises")
